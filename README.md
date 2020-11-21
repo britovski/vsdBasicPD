@@ -52,10 +52,11 @@ xxx
 
 For the third day labs, the MCQs guide to use ngspice_labs repo @ github.
 
-** First step is to clone ngspice_labs repo **
-  git clone https://github.com/kunalg123/ngspice_labs.git
- 
+**First step is to clone ngspice_labs repo**
 
+    git clone https://github.com/kunalg123/ngspice_labs.git
+ 
+After...
 
 
 
