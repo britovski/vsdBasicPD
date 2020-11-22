@@ -13,7 +13,7 @@ Cloud based learning is guided through learning skils as follows:
 ### Fundamentals
 - Board design x chip design
 - packages x chip/die (composed by PADs + core) x IC
-- Foundry IP´s x IP´s x Macros
+- Foundry IP's x IP's x Macros
 
 ### RISC-V ISA
 -
@@ -28,16 +28,26 @@ Cloud based learning is guided through learning skils as follows:
 -
 
 ## Day 2
-xxx
+Second workshop day begins with Chip Floorplanning concept. Some steps are introduced as part of Chip Floorplanning phase:
+    1) Define width and height of core and die based on standard cell dimensions
+    - Place all standard cells inside the core
+    - notions of utilization factor and aspect ratio.
+    2) Define location of pre-placed cells
+    - separate circuits in to blocks or modules
+    - select available IP's
+    * The arrangement of the cells (IP's, blocks, modules) is referred as floorplanning.
+    * pre-placed cells are placed in user-defined locations before automated place and route.
+    3)
+    
 
 ## Day 3
 
 Third day is focused on the design and characterization of one library cell using MAGIC layout tool and ngspice.
 
 ### SPICE Simulations (pre-layout)
--
--
--
+- SPICE deck / netlisting
+- ngspice intro with simulation commands (source, run, setplot, display, plot...)
+- 
 
 ### Art of Layout - Euler´s path and stick diagram
 xxx
@@ -61,3 +71,9 @@ After...
 
 
 ## Day 4
+xxx
+
+## Day 5
+xxx
+
+## Final notes
