@@ -66,7 +66,7 @@ On "tkcon" window, type "box".
 
 Question: What is the output area in microns?
 
-![q1](https://github.com/britovski/PhyDesign_WS/blob/main/images/l11.PNG)
+![q1_1](https://github.com/britovski/PhyDesign_WS/blob/main/images/l11.PNG)
 
 As we can show in the image above, the answer is: '15420.24 microns.'
 
@@ -94,7 +94,7 @@ After that the next labs introduce the picorv32 using qflow.
 
 Question: What is the % ratio of flipflop/total logic ?
 
-![q2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l12.PNG)
+![q2_1](https://github.com/britovski/PhyDesign_WS/blob/main/images/l12.PNG)
 
 The number of DFF cells divided by total number of cells give us the answer of 12-13.99% 
 
@@ -122,7 +122,7 @@ Second workshop day begins with **Chip Floorplanning concept**. Some steps are i
     - If many blocks discharges from '1' to '0' at same time in a single ground cause a bump (Gnd bounce). If from '0' to '1' a voltage droop (for single Vdd).
     - Istead of single supply lines, use multiple arrays of power supply (Vdd and Vss points). See image below (from xyalis).
     
-!(https://www.xyalis.com/wp-content/uploads/PowerGrid-1024x554.jpg)
+![powergrid](https://www.xyalis.com/wp-content/uploads/PowerGrid-1024x554.jpg)
 
     5) Pin placement
     - Connectivity is described using VHDL or verilog;
@@ -175,13 +175,13 @@ Two way hands-on labs are performed in day 2. First one is from learning concept
     Arrange Pins: Auto Group and apply
     Arrange Pins: New Group and create my_pin_grouping for resetn and clk pins. Check only left box, as we can seen in image below. 
     
-!(https://github.com/britovski/PhyDesign_WS/blob/main/images/l22.PNG)
+![q1_2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l22.PNG)
 
     Then, Run placement. 
 
 After that, is possible to see placement running with graywolf on below image screen
 
-!(https://github.com/britovski/PhyDesign_WS/blob/main/images/l23.PNG)
+![q2_2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l23.PNG)
 
 Second lab is guided by MCQs, and the goal is to measure layout area, as follows:
 
@@ -205,7 +205,7 @@ This will select the whole layout Now in tkcon window, type below command
 
 What is the area of you chip in microns?
 
-!(https://github.com/britovski/PhyDesign_WS/blob/main/images/l21.PNG)
+![q3_2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l21.PNG)
 
 As we can see on image above, the answer is '812062.19 microns.'
 
