@@ -106,29 +106,29 @@ Second day presents the Chip floorplanning as the preparation before automatic p
 
 ### Chip Floorplaning
 Second workshop day begins with **Chip Floorplanning concept**. Some steps are introduced as part of Chip Floorplanning phase:
-    1) Define width and height of core and die based on standard cell dimensions
-    - Place all standard cells inside the core
-    - notions of utilization factor and aspect ratio.
-    2) Define location of pre-placed cells
-    - separate circuits in to blocks or modules
-    - select available IP's
-    * The arrangement of the cells (IP's, blocks, modules) is referred as floorplanning.
-    * pre-placed cells are placed in user-defined locations before automated place and route.
-    3) Surround pre-placed cells with decoupling capacitors.
-    * Noise margin concept is presented (NMh for '1' and NMl for '0')
-    - Vdd or Vss could drop without decoupling caps between Vdd and Vss;
-    * Decoupling caps. are huge caps between Vdd and Vss and need to be placed near the circuit/block.
-    4) Power planning
-    - If many blocks discharges from '1' to '0' at same time in a single ground cause a bump (Gnd bounce). If from '0' to '1' a voltage droop (for single Vdd).
-    - Istead of single supply lines, use multiple arrays of power supply (Vdd and Vss points). See image below (from xyalis).
+1) Define width and height of core and die based on standard cell dimensions
+ - Place all standard cells inside the core
+ - notions of utilization factor and aspect ratio.
+2) Define location of pre-placed cells
+ - separate circuits in to blocks or modules
+ - select available IP's
+ * The arrangement of the cells (IP's, blocks, modules) is referred as floorplanning.
+ * pre-placed cells are placed in user-defined locations before automated place and route.
+3) Surround pre-placed cells with decoupling capacitors.
+ * Noise margin concept is presented (NMh for '1' and NMl for '0')
+ - Vdd or Vss could drop without decoupling caps between Vdd and Vss;
+ * Decoupling caps. are huge caps between Vdd and Vss and need to be placed near the circuit/block.
+4) Power planning
+ - If many blocks discharges from '1' to '0' at same time in a single ground cause a bump (Gnd bounce). If from '0' to '1' a voltage droop (for single Vdd).
+ - Istead of single supply lines, use multiple arrays of power supply (Vdd and Vss points). See image below (from xyalis).
     
 ![powergrid](https://www.xyalis.com/wp-content/uploads/PowerGrid-1024x554.jpg)
 
-    5) Pin placement
-    - Connectivity is described using VHDL or verilog;
-    - try to put pins near blocks;
-    - bigger PADs for clock pins.
-    6) Logical Cell placement blockage --> add PAD ring blocks.
+ 5) Pin placement
+  - Connectivity is described using VHDL or verilog;
+  - try to put pins near blocks;
+  - bigger PADs for clock pins.
+ 6) Logical Cell placement blockage --> add PAD ring blocks.
 
 **After floorplanning. We are ready for placement and routing steps**
 
@@ -137,19 +137,26 @@ Some tips are provided to use 'qflow gui' to setup placement (using pin arrangem
 Before introduction of Cell Design flow, some motivation is provided about **Placement** phase.
 
 ### Placement 
-    1) Before placement is required to bind netlist with physical cells. 
-    So, you need a **library**, that is a collection of blocks/cells with different flavors, sizes, *vt*, etc...).
-    2) Place the cells
-    3) Optimize the placement
-    - check signal integrity;
-    - add buffers for long paths;
-    4) After optimization, setup the timimg analysis with ideal clock. **we return to this on Day 4**
+1) Before placement is required to bind netlist with physical cells. 
+
+So, you need a **library**, that is a collection of blocks/cells with different flavors, sizes, *vt*, etc...).
+
+2) Place the cells
+
+3) Optimize the placement
+ - check signal integrity;
+ - add buffers for long paths;
+
+4) After optimization, setup the timimg analysis with ideal clock. **we return to this on Day 4**
 
 ### Cell Design Flow (standard cells)
+
 **Inputs:** PDKs, rules (DRC e LVS) and tech files, SPICE models, libraries and user defined specifications (supply voltages, layers, cell sizes, etc...).
+
 **Design steps:** circuit design, layout design, characterization (timing, noise, power, .libs, functions, etc...).
--GUNA software for characterization
--timing characterization is based on threshold definitions, propagation delays and transition times.
+- GUNA software for characterization
+- timing characterization is based on threshold definitions, propagation delays and transition times.
+
 **Outputs:** CDL, GDSII, LEF, extracted SPICE netlist (.cir)
 
 ### Hands-on Labs
@@ -208,7 +215,6 @@ What is the area of you chip in microns?
 ![q3_2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l21.PNG)
 
 As we can see on image above, the answer is '812062.19 microns.'
-
 
 
 ## Day 3
