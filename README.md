@@ -551,4 +551,8 @@ So, after routing, a drop in '20 MHz' can be observed for the maximum clock freq
 
 ## Final notes
 
-Good to learn physical design skills from digital flow and to know the basic opensource tools used for each task.
+Good to learn physical design skills from digital side and to know the basic opensource tools flow.
+
+## Acknowledgement
+
+Kunal Ghosh, Co-founder (VSD Corp. Pvt. Ltd)
