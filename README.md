@@ -107,28 +107,28 @@ Second day presents the Chip floorplanning as the preparation before automatic p
 ### Chip Floorplaning
 Second workshop day begins with **Chip Floorplanning concept**. Some steps are introduced as part of Chip Floorplanning phase:
 1) Define width and height of core and die based on standard cell dimensions
- - Place all standard cells inside the core
- - notions of utilization factor and aspect ratio.
+- Place all standard cells inside the core
+- notions of utilization factor and aspect ratio.
 2) Define location of pre-placed cells
- - separate circuits in to blocks or modules
- - select available IP's
- * The arrangement of the cells (IP's, blocks, modules) is referred as floorplanning.
- * pre-placed cells are placed in user-defined locations before automated place and route.
+- separate circuits in to blocks or modules
+- select available IP's
+   * The arrangement of the cells (IP's, blocks, modules) is referred as floorplanning.
+   * pre-placed cells are placed in user-defined locations before automated place and route.
 3) Surround pre-placed cells with decoupling capacitors.
- * Noise margin concept is presented (NMh for '1' and NMl for '0')
- - Vdd or Vss could drop without decoupling caps between Vdd and Vss;
- * Decoupling caps. are huge caps between Vdd and Vss and need to be placed near the circuit/block.
+   * Noise margin concept is presented (NMh for '1' and NMl for '0')
+- Vdd or Vss could drop without decoupling caps between Vdd and Vss;
+   * Decoupling caps. are huge caps between Vdd and Vss and need to be placed near the circuit/block.
 4) Power planning
- - If many blocks discharges from '1' to '0' at same time in a single ground cause a bump (Gnd bounce). If from '0' to '1' a voltage droop (for single Vdd).
- - Istead of single supply lines, use multiple arrays of power supply (Vdd and Vss points). See image below (from xyalis).
+- If many blocks discharges from '1' to '0' at same time in a single ground cause a bump (Gnd bounce). If from '0' to '1' a voltage droop (for single Vdd).
+- Istead of single supply lines, use multiple arrays of power supply (Vdd and Vss points). See image below (from xyalis).
     
 ![powergrid](https://www.xyalis.com/wp-content/uploads/PowerGrid-1024x554.jpg)
 
- 5) Pin placement
-  - Connectivity is described using VHDL or verilog;
-  - try to put pins near blocks;
-  - bigger PADs for clock pins.
- 6) Logical Cell placement blockage --> add PAD ring blocks.
+5) Pin placement
+- Connectivity is described using VHDL or verilog;
+- try to put pins near blocks;
+- bigger PADs for clock pins.
+6) Logical Cell placement blockage --> add PAD ring blocks.
 
 **After floorplanning. We are ready for placement and routing steps**
 
@@ -180,7 +180,9 @@ Two way hands-on labs are performed in day 2. First one is from learning concept
 
     Placement settings: init. Density 0.7
     Arrange Pins: Auto Group and apply
-    Arrange Pins: New Group and create my_pin_grouping for resetn and clk pins. Check only left box, as we can seen in image below. 
+    Arrange Pins: New Group and create my_pin_grouping for resetn and clk pins. Check only left box. 
+    
+as we can seen in image below. 
     
 ![q1_2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l22.PNG)
 
@@ -190,7 +192,7 @@ After that, is possible to see placement running with graywolf on below image sc
 
 ![q2_2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l23.PNG)
 
-Second lab is guided by MCQs, and the goal is to measure layout area, as follows:
+**Second lab is guided by MCQs, and the goal is to measure layout area, as follows:**
 
 Type below command
 
@@ -224,16 +226,48 @@ Third day is focused on the design and characterization of one library cell usin
 ### SPICE Simulations (pre-layout)
 - SPICE deck / netlisting
 - ngspice intro with simulation commands (source, run, setplot, display, plot...)
-- 
+- static behaviour evaluation (example of CMOS INV robustness)
+ 1. switching thereshold (*Vm*)
+- dynamic behaviour evaluation
+ 2. propagation delay (rise and fall)
 
 ### Art of Layout - Euler´s path and stick diagram
-xxx
+- pull-up + pull-down networks (concept introduced by building a complex logic circuit with 6 inputs and 1 output).
+- pre-layout SPICE simulations (you can use virtual machine or cygdrive on windows for ngspice and MAGIC)
+- discussion of stick diagram only vs using Euler´s path.
+ * stick only needs lots of contacts/metal connections and diffusion breaks;
+ * with Euler´s path is the best option.
+- Euler´s path is the first step to input gate re-order (that is an optimization for stick diagram).
+ * PMOS + NMOS network graphs (numbering nodes and edges as transistor labels).
+- Do stick diagram with gates re-ordered.
+- Abstract level layout can be done using optimized stick diagram.
 
 ### MAGIC Labs
-zzz
+- stick diagram to layout or abstract level layout to real layout dimensions;
+- check tech file/design rules;
+- derive actual dimensions;
+- prepare script to create layout in MAGIC (*draw_fm.tcl*);
+- final layout and labeling
 
-### Post-layout simulations
-xxx
+        > magic -T 'techfile'
+        put script commands in tkcon to create layout step-by-step
+        or use 
+        > source draw_fm.tcl
+        finish layout
+        label and save
+        
+- Extract SPICE with parasitics, typing below commands in tkcon
+
+        > extract all
+        > ext2spice
+
+### Post-layout simulation
+- use .ext file from MAGIC extraction
+- simulate and compare with pre-layout
+
+### CMOS Fabrication Process
+
+A 16-mask CMOS process is used as example to show how all layout regions are related to the fabrication process.
 
 ### Hands-on Labs
 
@@ -243,8 +277,117 @@ For the third day labs, the MCQs guide to use ngspice_labs repo @ github.
 
     git clone https://github.com/kunalg123/ngspice_labs.git
  
-After...
+After that, some tasks are guided, as to check transistor sizes
 
+    cd ngspice_labs
+    cat inv.spice
+
+What is the width of PMOS and NMOS transistors?
+
+![q1_3](https://github.com/britovski/PhyDesign_WS/blob/main/images/33.PNG)
+
+As we can see in image above, the answer is '0.5 for PMOS and 0.375 for NMOS', respectively.
+
+Then, we go through simulations
+
+Go to labs, open terminal
+Type below commands
+
+    cd ngspice_labs
+    ngspice inv.spice
+
+There will be terminal like below
+
+    ngspice 1 ->
+
+On the above ngspice terminal, type below commands
+
+    run
+    setplot dc1
+    plot out in
+
+This will open a plot with CMOS VTC and Blue 45 degree line
+Click on the intersection of Blue line and CMOS VTC.
+Go to terminal
+What does "x0" value lies between?
+
+![q2_3](https://github.com/britovski/PhyDesign_WS/blob/main/images/34.PNG)
+
+As we can seen in image above, the answer is '1.0v-1.1v'
+
+Then, go to labs, open terminal
+Type below command
+
+    leafpad inv.spice
+
+Edit the width of PMOS to 0.75u
+Press Ctrl+s to save the file and exit the file
+Repeat experiment given in D3SK1 - MCQ8 (previous MCQ)
+Where does the switching threshold lies between?
+
+![q3_3](https://github.com/britovski/PhyDesign_WS/blob/main/images/35.PNG)
+
+As we can seen in image above, the answer is '1.1v-1.2v'
+
+Go to labs, open terminal
+Open file called "inv_tran.spice" using below command
+
+    leafpad inv_tran.spice
+
+Change PMOS width to 0.75u, Save and Close
+
+Type below commands for transient simulations
+
+    ngspice inv_tran.spice
+    ngspice 1 -> run
+    ngspice 1 -> setplot tran1
+    ngspice 1 -> plot out in
+
+What is the rise delay? Refer to Lesson 4 of D3SK1 to learn how to calculate rise delay
+
+![q3_4](https://github.com/britovski/PhyDesign_WS/blob/main/images/39corr.PNG)
+
+As we can seen in image above, the answer is approximately '76ps'.
+
+Go to labs, open terminal
+Type below commands
+
+    cd ngspice_labs
+    magic -T min2.tech
+
+This will open magic layout window and tkcon window
+Go to tkcon window and type below command
+
+    source draw_fn.tcl
+
+In layout window, how many nsubstratecontact and how many polysilicon strips you observe?
+
+![q3_5](https://github.com/britovski/PhyDesign_WS/blob/main/images/37.PNG)
+
+As we can seen in image above, the answer is '8 e 6', respectively.
+
+Go to labs, open terminal
+Type below command
+
+    cd ngspice_labs
+    magic -T min2.tech fn_postlayout.mag &
+
+What is the area of this design?
+
+![q3_6](https://github.com/britovski/PhyDesign_WS/blob/main/images/38.PNG)
+
+As we can seen in image above, the answer is '4489 microns.'
+
+After that, the MCQ guide to perform the post-layout simulation of the previously presented logic circuit, doing parasitic extraction and then editing the file with the same simulation commands from pre-layout simulation.
+
+![q3_7_1](https://github.com/britovski/PhyDesign_WS/blob/main/images/41.PNG)
+
+Question: What is the value of X0 at intersection rising & falling waveform and intersection of horizontal blue line?
+
+![q3_7_2](https://github.com/britovski/PhyDesign_WS/blob/main/images/42.PNG)
+
+As we can seen in image above and performing calculations, the answer is 'around 1.58ns and 2.27ns respectively'.
+* There was no blue line, but we figure out that is calculated in reference to the the Vdd/2 X value.
 
 
 ## Day 4
