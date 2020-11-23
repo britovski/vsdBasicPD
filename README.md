@@ -53,9 +53,9 @@ Some labs are performed using web based linux virtual machine with opensource to
     ./vsdflow spi_slave_design_details.csv
     ls -ltr outdir_spi_slave/
 
-**and we can see some files creates.
+**and we can see some files creates**
 
-**entering in the created folder and opening qflow with display option
+**entering in the created folder and opening qflow with display option**
 
     cd outdir_spi_slave
     qflow display spi_slave
