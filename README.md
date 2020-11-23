@@ -54,16 +54,27 @@ Some labs are performed using web based linux virtual machine with opensource to
     ls -ltr outdir_spi_slave/
 
 **and we can see some files creates.
+
 **entering in the created folder and opening qflow with display option
 
     cd outdir_spi_slave
     qflow display spi_slave
 
-**It will open 2 windows "layout1" and "tkcon"
-**On "tkcon" window, type "box".
-**Question: What is the output area in microns?
-![q1](https://github.com/britovski/PhyDesign_WS/blob/main/images/l12.PNG)
+It will open 2 windows "layout1" and "tkcon"
 
+On "tkcon" window, type "box".
+
+Question: What is the output area in microns?
+
+![q1](https://github.com/britovski/PhyDesign_WS/blob/main/images/l11.PNG)
+
+As we can show in the image above, the answer is: 15420.24 microns.
+
+******
+
+![q2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l12.PNG)
+
+The number of DFF cells divided by total number of cells give us an answer of 12-13.99% 
 
 ## Day 2
 Second workshop day begins with Chip Floorplanning concept. Some steps are introduced as part of Chip Floorplanning phase:
