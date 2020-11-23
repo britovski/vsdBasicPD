@@ -120,10 +120,7 @@ Second workshop day begins with **Chip Floorplanning concept**. Some steps are i
    * Decoupling caps. are huge caps between Vdd and Vss and need to be placed near the circuit/block.
 4) Power planning
 - If many blocks discharges from '1' to '0' at same time in a single ground cause a bump (Gnd bounce). If from '0' to '1' a voltage droop (for single Vdd).
-- Istead of single supply lines, use multiple arrays of power supply (Vdd and Vss points). See image below (from xyalis).
-    
-![powergrid](https://www.xyalis.com/wp-content/uploads/PowerGrid-1024x554.jpg)
-
+- Istead of single supply lines, use multiple arrays of power supply (Vdd and Vss points). 
 5) Pin placement
 - Connectivity is described using VHDL or verilog;
 - try to put pins near blocks;
