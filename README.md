@@ -62,7 +62,7 @@ Some labs are performed using web based linux virtual machine with opensource to
 **It will open 2 windows "layout1" and "tkcon"
 **On "tkcon" window, type "box".
 **Question: What is the output area in microns?
-https://github.com/britovski/PhyDesign_WS/blob/main/images/l22.PNG
+![q1](https://github.com/britovski/PhyDesign_WS/blob/main/images/l12.PNG)
 
 
 ## Day 2
