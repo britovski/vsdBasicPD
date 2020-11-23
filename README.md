@@ -68,13 +68,35 @@ Question: What is the output area in microns?
 
 ![q1](https://github.com/britovski/PhyDesign_WS/blob/main/images/l11.PNG)
 
-As we can show in the image above, the answer is: 15420.24 microns.
+As we can show in the image above, the answer is: '15420.24 microns.'
 
-******
+After that the next labs introduce the picorv32 using qflow.
+
+**typing below commands
+
+    cd
+    cd vsdflow
+    mkdir my_picorv32
+    cd my_picorv32
+    mkdir source synthesis layout
+    cp ~/vsdflow/verilog/picorv32.v source/.
+    qflow gui &
+
+**Select below options in gui
+
+    Technology = osu018
+    Verilog source file : picorv32.v
+    Verilog module : picorv32
+
+**Click on Set Stop
+
+**Then run labs till synthesis as shown in Labs Video
+
+Question: What is the % ratio of flipflop/total logic ?
 
 ![q2](https://github.com/britovski/PhyDesign_WS/blob/main/images/l12.PNG)
 
-The number of DFF cells divided by total number of cells give us an answer of 12-13.99% 
+The number of DFF cells divided by total number of cells give us the answer of 12-13.99% 
 
 ## Day 2
 Second workshop day begins with Chip Floorplanning concept. Some steps are introduced as part of Chip Floorplanning phase:
