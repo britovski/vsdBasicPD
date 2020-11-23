@@ -1,4 +1,4 @@
-# PhyDesign_WS
+# vsdBasicPD
 Physical Design Workshop repo
 
 ## Description
