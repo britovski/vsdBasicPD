@@ -391,9 +391,167 @@ As we can seen in image above and performing calculations, the answer is 'around
 
 
 ## Day 4
-xxx
+
+Day 4 is focused on timing analysis and some concepts of clock tree synthesis. First is shown timing modeling using delay tables and then is shown how timing analysis is performed with ideal and real clocks.
+
+### Timing Modeling
+
+Timing modeling is performed with the use of delay tables, that combines *input slews* and *output load* values.
+
+In order to model timing for clock tree structures, is necessary to take care with:
+- at every level, each node drive same load;
+- identical buffers need to be used at same level.
+
+### Timing analysis (with ideal clock)
+
+If *T* is the clock period and *Teta* is the combinational logic delay, is necessary that *T > Teta*.
+
+Considering setup time *S* for a capture FF, *Teta < (T-S)*.
+
+Considering clock jitter, is necessary to take care with setup time uncertainty *SU*, so *Teta < (T-S-SU)*.
+
+### Clock Tree Synthesis (CTS)
+
+The goal of CTS is to put clock skew as low as possible (ideally *0 ps*).
+
+Some techniques are used to achieve a good CTS:
+- H-Tree technique (midpoints to derive clock);
+- Buffering (since H-Tree do not avoid long paths, we need to put buffers);
+- Net shielding (to avoid crosstalk/glitches).
+
+### Timing analysis (with real clock)
+
+In real timing analysis is necessary to consider clock delays.
+
+Considering the topology of a launch FF connected to a combinational logic circuit and then with a capture FF, *Delta1* been the delay from *CLK* to launch FF, and *Delta2 been the delay from *CLK* to capture FF, *(Teta + Delta1) < [(T + Delta2) - S - SU]*. The first term is the Data Arrival Time (DAT) and the second term is the Data Required Time (DRT). *DRT- DAT* is known as *Slack* and need to be *0* or positive.
+
+You can also do timing analysis considering hold time *H* istead of setup time. In this case, *(Teta + Delta1) > [(T + Delta2) + H + HU]*.
+
+### Hands-on Labs
+
+The labs are performed to analyze .lib file and also to setting up files for 'sta'.
+
+Some inspections of the below file are done
+
+    /usr/local/share/qflow/tech/osu018/osu018_stdcells.lib
+
+Then, labs goes to setting up files for timing analysis.
+
+Type below command
+
+    cd vsdflow/my_picorv32
+    leafpad picorv32.sdc
+
+Type below lines in the file picorv32.sdc file which you have just opened above
+
+    create_clock -name clk -period 2.5 -waveform {0 1.25} [get_ports clk]
+
+Save and close the above file
+
+Now type below command
+
+    leafpad prelayout_sta.conf
+
+Type below lines in prelayout_sta.conf file which you have just opened above
+
+    read_liberty /usr/local/share/qflow/tech/osu018/osu018_stdcells.lib
+    read_verilog synthesis/picorv32.rtlnopwr.v
+    link_design picorv32
+    read_sdc picorv32.sdc
+    report_checks
+
+Save and close the above file
+
+Now type below command
+
+    sta prelayout_sta.conf
+
+What is the SLACK value you see?
+
+![q3_4](https://github.com/britovski/PhyDesign_WS/blob/main/images/l43.PNG)
+
+As we can see in the image above, the answer is '-0.56'.
+
+Repeat all steps.
+NOTE - If you have already done that, then you will see below 'sta' terminal like below
+
+    %
+
+Type below command
+
+    report_checks -digits 4
+
+What is the data arrival time?
+
+![q3_4](https://github.com/britovski/PhyDesign_WS/blob/main/images/l44.PNG)
+
+As we can see in the above image, the answer is '2.9001'.
 
 ## Day 5
-xxx
+
+Final workshop day is focused on routing and other steps for final SoC Design.
+
+### Routing
+Explanation of Maze routing - Lee´s Algorithm
+- creates a routing grid;
+- find best route from a source to a target;
+- automated process*;
+
+### DRC
+- know typical rules;
+- check for DRC violations;
+- make a DRC clean.
+
+### Parasitics Extraction
+- Every physical via is represented at least as an RC circuit;
+- SPEF / IEEE 1481-1999 (Representation format);
+
+### Pending: signoff timing analysis (complete timing analysis using SPEF) and power analysis
+
+### Some tips of Qflow on PnR
+- Pin placemente/add groups. Try to relax constraints if get errors;
+- STA, result includes max. clock
+- Routing, that creates parasitic file for post-route STA
+- Migration, just converts results into file format used by open galaxy
+- Using edit layout (*s* for top level cell selection, and *shift + f* to expand cell view).
+
+### Hands-on Labs
+
+The labs were focused on timing analysis before and after timing analysis.
+
+Open terminal
+Type below commands
+
+    cd vsdflow/my_picorv32
+    qflow route picorv32
+    qflow sta picorv32
+    qflow backanno picorv32
+    leafpad log/sta.log
+
+What is the pre-layout frequency?
+Hint - Search for case-sensitive keyword "MHz"
+
+![q1_5](https://github.com/britovski/PhyDesign_WS/blob/main/images/l54.PNG)
+
+As we can see in above image, the answer is '314 MHz'.
+
+Then, doing routing...
+
+![q2_5](https://github.com/britovski/PhyDesign_WS/blob/main/images/l52.PNG)
+
+and open the below file
+
+    log/post_sta.log
+
+What is post-layout frequency?
+
+![q1_5](https://github.com/britovski/PhyDesign_WS/blob/main/images/l55.PNG)
+
+As we can see in above image, the answer is '294 MHz'.
+
+So, after routing, a drop in '20 MHz' can be observed for the maximum clock frequency.
+
 
 ## Final notes
+
+Good to learn physical design skills from digital flow and to know the basic opensource tools used for each task.
